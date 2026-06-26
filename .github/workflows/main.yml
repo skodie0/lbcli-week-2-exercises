@@ -92,10 +92,11 @@ jobs:
 
       - name: 05.sh - Verify Transaction ID
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/05.sh
           TRANSACTION_ID=$(submission/05.sh)
-          EXPECTED_OUTPUT=23c19f37d4e92e9a115aab86e4edc1b92a51add4e0ed0034bb166314dde50e16
-          if [[ "$TRANSACTION_ID" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=8d525cefe69884198597d155bdcf28955b0dceb4d6e3fff3fa586ba64b26f01e
+          if [[ "$(actual_sha "$TRANSACTION_ID")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Transaction ID Check passed!"
           else
             echo "❌ Error: Transaction ID Check failed!"
@@ -104,10 +105,11 @@ jobs:
 
       - name: 06.sh - Verify Total Transaction Output Amount In Satoshis
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/06.sh
           ACTUAL_OUTPUT=$(submission/06.sh)
-          EXPECTED_OUTPUT=23679108
-          if [[ "$ACTUAL_OUTPUT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=f1e1bc1289975d0c41aa8f27020f6461e2d1af15b9021439b4af024dd6b1bdf4
+          if [[ "$(actual_sha "$ACTUAL_OUTPUT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Total Transaction Output Amount In Satoshis Check passed!"
           else
             echo "❌ Error: Total Transaction Output Amount In Satoshis Check failed!"
@@ -116,10 +118,11 @@ jobs:
 
       - name: 07.sh - Verify Raw Transaction Hex
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/07.sh
           ACTUAL_OUTPUT=$(submission/07.sh)
-          EXPECTED_OUTPUT=0200000002160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc1230000000000fdffffff160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc1230100000000fdffffff01002d31010000000017a91421ed90762e16eaaea188aae19142e5b25bf75d238700000000
-          if [[ "$ACTUAL_OUTPUT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=1d1aba012675386fb07a898edb1a13a18fc769b55adc916bebd7fc9ce17aa968
+          if [[ "$(actual_sha "$ACTUAL_OUTPUT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Raw Transaction Hex Check passed!"
           else
             echo "❌ Error: Raw Transaction Hex Check failed!"
@@ -128,10 +131,11 @@ jobs:
 
       - name: 08.sh - Verify Raw Transaction Hex
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/08.sh
           ACTUAL_OUTPUT=$(submission/08.sh)
-          EXPECTED_OUTPUT=0200000002160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc1230000000000fdffffff160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc1230100000000fdffffff01640269010000000017a91421ed90762e16eaaea188aae19142e5b25bf75d238700000000
-          if [[ "$ACTUAL_OUTPUT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=2c29db8b2cc83fd94e1b5415cf4b2e6b3331c580cbc63311224be7d5afaf4626
+          if [[ "$(actual_sha "$ACTUAL_OUTPUT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Raw Transaction Hex Check passed!"
           else
             echo "❌ Error: Raw Transaction Hex Check failed!"
@@ -140,10 +144,11 @@ jobs:
       
       - name: 09.sh - Verify Raw Transaction Hex
         run: |
+          actual_sha() { printf '%s' "$1" | sha256sum | awk '{print $1}'; }
           chmod +x submission/09.sh
           ACTUAL_OUTPUT=$(submission/09.sh)
-          EXPECTED_OUTPUT=0200000002160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc123000000000001000000160ee5dd146316bb3400ede0d4ad512ab9c1ede486ab5a119a2ee9d4379fc12301000000000100000001002d31010000000017a91421ed90762e16eaaea188aae19142e5b25bf75d238700000000
-          if [[ "$ACTUAL_OUTPUT" == "$EXPECTED_OUTPUT" ]]; then
+          EXPECTED_SHA=b9bdf2454bfacdfc47809edef0416035f0c9a1ed397cd7c32a40c0536208eac6
+          if [[ "$(actual_sha "$ACTUAL_OUTPUT")" == "$EXPECTED_SHA" ]]; then
             echo "✅ Success: Raw Transaction Hex Check passed!"
           else
             echo "❌ Error: Raw Transaction Hex Check failed!"

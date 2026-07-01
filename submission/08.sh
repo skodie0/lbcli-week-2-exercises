@@ -11,7 +11,7 @@ VOUT_COUNT=$(echo "$DECODED" | jq '.vout | length')
  
 TOTAL_INPUT=$(echo "$DECODED" | jq -r '([.vout[].value] | add) * 100000000 | round')
 OUTPUT=$((TOTAL_INPUT - FEE))
-OUTPUT_BTC=$(printf "%.8f" "$(echo "scale=8; $OUTPUT / 100000000" | bc)")
+OUTPUT_BTC=$(jq -n "$OUTPUT/100000000")
  
 INPUTS="[]"
 for i in $(seq 0 $((VOUT_COUNT - 1))); do

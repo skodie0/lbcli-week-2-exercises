@@ -7,11 +7,5 @@ PAYMENT_ADDRESS="2MvLcssW49n9atmksjwg2ZCMsEMsoj3pzUP"
  
 DECODED=$(bitcoin-cli -regtest decoderawtransaction "$raw_tx")
 TXID=$(echo "$DECODED" | jq -r '.txid')
-VOUT_COUNT=$(echo "$DECODED" | jq '.vout | length')
  
-INPUTS="[]"
-for i in $(seq 0 $((VOUT_COUNT - 1))); do
-  INPUTS=$(echo "$INPUTS" | jq --arg txid "$TXID" --argjson vout "$i" '. + [{"txid":$txid,"vout":$vout}]')
-done
- 
-bitcoin-cli -regtest createrawtransaction "$INPUTS" "[{\"$PAYMENT_ADDRESS\":0.2}]" 0 true
+bitcoin-cli -regtest createrawtransaction '[{ "txid": "'"$TXID"'", "vout": 0, "sequence": 1 }, { "txid": "'"$TXID"'", "vout": 1, "sequence": 1 }]' '{"'"$PAYMENT_ADDRESS"'": 0.2}' 0 true
